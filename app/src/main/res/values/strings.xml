@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BestAndori</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_profile">Profile</string>
+    <string name="label_home">Home</string>
 </resources>

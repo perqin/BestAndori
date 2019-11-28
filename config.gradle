@@ -1,0 +1,4 @@
+ext {
+    // Dependencies
+    navVersion = '2.1.0'
+}
