@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.caverock.androidsvg.SVGImageView
 import io.github.bestandori.R
+import io.github.bestandori.data.model.toAssetFilename
 import io.github.bestandori.ui.widget.DestFragment
 import io.github.bestandori.util.Status
 import kotlinx.android.synthetic.main.fragment_profiles.*
@@ -30,7 +31,9 @@ class ProfilesFragment : DestFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerAdapter = RecyclerAdapter(requireContext())
+        recyclerAdapter = RecyclerAdapter(requireContext()) {
+            viewModel.switchProfile(it.id)
+        }
         recyclerView.adapter = recyclerAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         addProfileFab.setOnClickListener {
@@ -51,7 +54,7 @@ class ProfilesFragment : DestFragment() {
     }
 }
 
-private class RecyclerAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+private class RecyclerAdapter(private val context: Context, private val onItemClick: (Profile) -> Unit) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     var profiles: List<Profile> = emptyList()
         set(value) {
             field = value
@@ -67,13 +70,16 @@ private class RecyclerAdapter(private val context: Context) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val profile = profiles[position]
         holder.nameTextView.text = profile.name
-        // TODO: holder.serverImageView show server flag
+        holder.serverImageView.setImageAsset(profile.server.toAssetFilename())
         holder.summaryTextView.text = context.getString(R.string.text_profileCardsCount, profile.cardsCount)
         holder.activeIndicatorView.visibility = if (profile.active) View.VISIBLE else View.GONE
+        holder.itemView.setOnClickListener {
+            onItemClick(profile)
+        }
     }
 
     private class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val serverImageView: ImageView = itemView.serverImageView
+        val serverImageView: SVGImageView = itemView.serverImageView
         val nameTextView: TextView = itemView.nameTextView
         val summaryTextView: TextView = itemView.summaryTextView
         val activeIndicatorView: View = itemView.activeIndicatorView

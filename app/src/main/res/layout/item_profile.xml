@@ -8,7 +8,7 @@
     android:clickable="true"
     android:focusable="true">
 
-    <ImageView
+    <com.caverock.androidsvg.SVGImageView
         android:id="@+id/serverImageView"
         android:layout_width="40dp"
         android:layout_height="40dp"

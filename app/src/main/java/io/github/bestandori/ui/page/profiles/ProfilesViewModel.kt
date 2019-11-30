@@ -1,16 +1,20 @@
 package io.github.bestandori.ui.page.profiles
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.viewModelScope
 import io.github.bestandori.data.model.Server
 import io.github.bestandori.data.repository.ProfilesRepository
+import io.github.bestandori.data.sp.SpRepository
+import io.github.bestandori.util.PK_ACTIVE_PROFILE_ID
 import io.github.bestandori.util.Resource
 import io.github.bestandori.util.ResourceLiveData
 import kotlinx.coroutines.launch
 
 class ProfilesViewModel(application: Application) : AndroidViewModel(application) {
-    private val activeProfileId = MutableLiveData<Int>() // TODO: Create from SharedPreferences
-    // TODO: Any performance issue on switching active Profile?
+    private val activeProfileId = SpRepository.liveSp.getInt(PK_ACTIVE_PROFILE_ID, -1)
     private val profiles = ResourceLiveData {
         ProfilesRepository.loadAllProfiles(true)
     }
@@ -19,7 +23,7 @@ class ProfilesViewModel(application: Application) : AndroidViewModel(application
             val activeProfileId = this@ProfilesViewModel.activeProfileId.value
             val profiles = this@ProfilesViewModel.profiles.value
             val synthesizedProfiles = profiles.data?.map { profileModel ->
-                Profile(profileModel.name, profileModel.server, profileModel.cardsCount, profileModel.id == activeProfileId)
+                Profile(profileModel.id, profileModel.name, profileModel.server, profileModel.cardsCount, profileModel.id == activeProfileId)
             }
             value = Resource(profiles.status, synthesizedProfiles, profiles.error)
         }
@@ -31,6 +35,10 @@ class ProfilesViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             profiles.reload()
         }
+    }
+
+    fun switchProfile(id: Int) {
+        SpRepository.update(PK_ACTIVE_PROFILE_ID, id)
     }
 
     /**
@@ -45,6 +53,7 @@ class ProfilesViewModel(application: Application) : AndroidViewModel(application
 }
 
 data class Profile(
+    val id: Int,
     val name: String,
     val server: Server,
     val cardsCount: Int,

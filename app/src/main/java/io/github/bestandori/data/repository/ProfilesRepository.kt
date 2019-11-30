@@ -12,7 +12,7 @@ object ProfilesRepository {
     }
 
     suspend fun loadProfile(id: Int): ProfileModel {
-        return ProfileModel.fromSerialized(fileStorage.load(filenameOf(id)))
+        return ProfileModel.fromSerialized(id, fileStorage.load(filenameOf(id)))
     }
 
     suspend fun saveProfile(profile: ProfileModel) {
@@ -24,7 +24,7 @@ object ProfilesRepository {
      */
     suspend fun loadAllProfiles(basic: Boolean): List<ProfileModel> {
         return fileStorage.list().map {
-            ProfileModel.fromSerialized(fileStorage.load(it), basic)
+            ProfileModel.fromSerialized(it.split('.')[0].toInt(), fileStorage.load(it), basic)
         }
     }
 
