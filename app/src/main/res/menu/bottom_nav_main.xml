@@ -5,8 +5,15 @@
         android:id="@+id/destHomeFragment"
         android:icon="@drawable/ic_home"
         android:title="@string/label_home" />
+
+    <item
+        android:id="@+id/destInformationFragment"
+        android:icon="@drawable/ic_information"
+        android:title="@string/label_information" />
+
     <item
         android:id="@+id/destProfileFragment"
         android:icon="@drawable/ic_profile"
         android:title="@string/label_profile" />
+
 </menu>

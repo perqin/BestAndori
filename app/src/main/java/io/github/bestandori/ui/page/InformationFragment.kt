@@ -1,4 +1,4 @@
-package io.github.bestandori
+package io.github.bestandori.ui.page
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,17 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import io.github.bestandori.ui.page.AccountFragment
-import io.github.bestandori.ui.page.profiles.ProfilesFragment
+import io.github.bestandori.R
+import io.github.bestandori.ui.page.cards.CardsFragment
 import io.github.bestandori.util.lazyListOf
-import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.fragment_information.view.*
 
-class ProfileFragment : Fragment() {
+/**
+ * A simple [Fragment] subclass.
+ */
+class InformationFragment : Fragment() {
     private lateinit var pagerAdapter: PagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_information, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,8 +36,7 @@ class ProfileFragment : Fragment() {
 
 private class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     private val fragments = lazyListOf(
-        { AccountFragment() },
-        { ProfilesFragment() }
+        { CardsFragment() }
     )
 
     override fun getItemCount() = fragments.size

@@ -18,5 +18,13 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/destProfileFragment" />
+        <action
+            android:id="@+id/action_destHomeFragment_to_informationFragment"
+            app:destination="@id/destInformationFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/destInformationFragment"
+        android:name="io.github.bestandori.ui.page.InformationFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_information" />
 </navigation>
