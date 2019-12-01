@@ -8,4 +8,13 @@
     <string name="label_profile">Profile</string>
     <string name="label_filter">Filter</string>
     <string name="text_profileCardsCount">Cards: %d</string>
+    <string name="label_username">Username</string>
+    <string name="label_password">Password</string>
+    <string name="label_login">Login via bestdori.com</string>
+    <string name="label_logout">Logout</string>
+    <string name="text_loggedInAs">Logged in as @%s.</string>
+    <string name="label_openWebPage">Open bestdori.com</string>
+    <string name="text_loginFailed">Login failed</string>
+    <string name="label_refresh">Refresh</string>
+    <string name="text_loading">Loading…</string>
 </resources>

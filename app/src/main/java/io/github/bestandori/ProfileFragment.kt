@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import io.github.bestandori.ui.page.AccountFragment
+import io.github.bestandori.ui.page.account.AccountFragment
 import io.github.bestandori.ui.page.profiles.ProfilesFragment
 import io.github.bestandori.util.lazyListOf
 import kotlinx.android.synthetic.main.fragment_profile.view.*

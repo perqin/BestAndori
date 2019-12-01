@@ -14,4 +14,8 @@ object SpRepository {
     fun update(key: String, int: Int) {
         liveSp.getPreferences().edit().putInt(key, int).apply()
     }
+
+    fun update(key: String, string: String) {
+        liveSp.getPreferences().edit().putString(key, string).apply()
+    }
 }

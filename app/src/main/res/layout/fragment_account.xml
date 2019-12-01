@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootFrameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.page.AccountFragment">
+    tools:context=".ui.page.account.AccountFragment" >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include
+        layout="@layout/layout_account_not_logged_in"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent" />
 
+    <include
+        layout="@layout/layout_account_logged_in"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>
